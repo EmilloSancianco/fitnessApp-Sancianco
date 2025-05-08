@@ -8,8 +8,6 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import WorkoutDashboard from './pages/WorkoutDashboard';
 
-// ✅ Fixed ProtectedRoute to use the correct context
-
 function App() {
     const [user, setUser] = useState({
         id: null,
@@ -45,15 +43,19 @@ function App() {
 
     return (
       <UserProvider value={{ user, setUser, unsetUser }}>
-      <Router>
-          <Container>
-              <Routes>
-                  <Route path="/workouts" element={<WorkoutDashboard />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/login" element={<Login />} /> 
-              </Routes>
-          </Container>
-      </Router>
+        <Router>
+            <Container>
+                <Routes>
+                    {/* Redirect root (/) to /login */}
+                    <Route path="/" element={<Navigate to="/login" />} />
+
+                    {/* Other routes */}
+                    <Route path="/workouts" element={<WorkoutDashboard />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} /> 
+                </Routes>
+            </Container>
+        </Router>
       </UserProvider>
     );
 }

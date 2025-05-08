@@ -1,11 +1,17 @@
 import { useState, useEffect, useContext } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
+import { Notyf } from 'notyf'; // Import Notyf
 
 import UserContext from '../UserContext';
 
-export default function Login() {
+// Create a Notyf instance
+const notyf = new Notyf({
+    duration: 3000, // Duration of the notification
+    position: { x: 'right', y: 'top' }, // Position of the notification
+});
 
+export default function Login() {
     const { user, setUser } = useContext(UserContext);
 
     const [email, setEmail] = useState("");
@@ -32,11 +38,11 @@ export default function Login() {
                 retrieveUserDetails(data.access);
                 setEmail('');
                 setPassword('');
-                alert(`You are now logged in`);
-            } else if (data.error == "Incorrect email or password") {
-                alert(`Incorrect email or password`);
+                notyf.success(`You are now logged in`); // Use Notyf for success
+            } else if (data.error === "Incorrect email or password") {
+                notyf.error(`Incorrect email or password`); // Use Notyf for error
             } else {
-                alert(`${email} does not exist`);
+                notyf.error(`${email} does not exist`); // Use Notyf for error
             }
         })
     }
@@ -65,9 +71,9 @@ export default function Login() {
     }, [email, password]);
 
     return (
-        user.id !== null ?
-            <Navigate to="/workouts" />
-            :
+        user.id !== null ? 
+            <Navigate to="/workouts" /> 
+            : 
             <Container className="d-flex justify-content-center align-items-center min-vh-100">
                 <div className="login-form p-4 shadow-lg rounded">
                     <div className="text-center mb-4">
@@ -99,11 +105,11 @@ export default function Login() {
                             />
                         </Form.Group>
 
-                        {isActive ?
+                        {isActive ? 
                             <Button variant="primary" type="submit" id="loginBtn">
                                 Login
                             </Button>
-                            :
+                            : 
                             <Button variant="danger" type="submit" id="loginBtn" disabled>
                                 Login
                             </Button>
