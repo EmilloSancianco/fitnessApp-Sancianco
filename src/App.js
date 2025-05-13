@@ -7,6 +7,7 @@ import { UserProvider } from './UserContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import WorkoutDashboard from './pages/WorkoutDashboard';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
     const [user, setUser] = useState({
@@ -50,9 +51,16 @@ function App() {
                     <Route path="/" element={<Navigate to="/login" />} />
 
                     {/* Other routes */}
-                    <Route path="/workouts" element={<WorkoutDashboard />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} /> 
+                    <Route
+                        path="/workouts"
+                        element={
+                            <PrivateRoute>
+                                <WorkoutDashboard />
+                            </PrivateRoute>
+                        }
+                    />
                 </Routes>
             </Container>
         </Router>

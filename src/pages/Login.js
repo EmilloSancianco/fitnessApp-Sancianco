@@ -80,9 +80,6 @@ export default function Login() {
             : 
             <Container className="d-flex justify-content-center align-items-center min-vh-100">
                 <div className="login-form p-4 shadow-lg rounded">
-                    <div className="text-center mb-4">
-                        <img src="path_to_your_logo.png" alt="Logo" className="img-fluid" />
-                    </div>
                     <h1 className="my-4 text-center">Login</h1>
 
                     {/* Show loading spinner if `loading` is true */}

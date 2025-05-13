@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Modal, Form } from 'react-bootstrap';
 import WorkoutCard from '../components/WorkoutCard';
 import { Notyf } from 'notyf';
+import NavbarLogout from '../components/NavbarLogout';
 import 'notyf/notyf.min.css';
 
 const notyf = new Notyf();
@@ -224,7 +225,9 @@ export default function WorkoutDashboard() {
 
     return (
         <div className="dashboard-bg py-5" style={{ position: 'relative' }}>
-            <Container>
+            <>
+            <NavbarLogout />
+            <Container className="mt-5 pt-5">
                 <section className="dashboard-header text-center mb-5">
                     <h1 className="fw-bold">My Workout Dashboard</h1>
                     <p className="text-muted">Track, plan, and dominate your workout goals</p>
@@ -336,6 +339,7 @@ export default function WorkoutDashboard() {
                     </Modal.Footer>
                 </Modal>
             </Container>
+            </>
         </div>
     );
 }
